@@ -3,14 +3,25 @@ import Button from "../components/Button"
 import Input from "../components/Input"
 import { useState } from "react"
 
-const SignIn = () => {
-    const [error, setError] = useState()
+const SignIn = async (e) => {
+    const [error, setError] = useState("")
 
     const handleSubmit = (e) => {
         e.preventDefault()
         setError("")
-    }
 
+        const user = {
+            username: e.target.username.value,
+            password: e.target.password.value
+        } try {
+            const data = await loginUser(user)
+            const json = await data.json()
+        } catch (err) {
+            console.error(err)
+            setError(err.message)
+        }
+
+    }
     return (
         <div className="auth-page">
             <div className="auth-container">

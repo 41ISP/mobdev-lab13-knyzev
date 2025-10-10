@@ -15,15 +15,19 @@ const SignUp = () => {
             setError("Пароли не совпадают")
             return
         }
-        
+
         const user = {
             username: e.target.username.value,
             email: e.target.email.value,
             password: e.target.password.value
         }
-
-        const data = await registerUser(user)
-        console.log(data);
+        try {
+            const data = await registerUser(user)
+            console.log(data);
+        }catch (err) {
+            console.error(err)
+            setError(err.message)
+        }
     }
 
     return (
